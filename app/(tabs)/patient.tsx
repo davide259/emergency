@@ -23,7 +23,7 @@ export default function PatientScreen() {
         {/* Button for patient with ID */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => router.push('/InsertPatient?hasID=true')}
+          onPress={() => router.push('/InsertPatient')}
         >
           <Text style={styles.buttonText}>
             Registration patient (via Tessera Sanitaria)
@@ -33,7 +33,7 @@ export default function PatientScreen() {
         {/* Button for patient without ID */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => router.push('//InsertPatient?hasID=false')}
+          onPress={() => router.push('/InsertPatientNO_ID')}
         >
           <Text style={styles.buttonText}>Registration patient (without any ID)</Text>
         </TouchableOpacity>
