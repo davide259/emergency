@@ -33,7 +33,7 @@ export default function PatientScreen() {
         {/* Button for patient without ID */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => router.push('/patientAfterRegister?hasID=false')}
+          onPress={() => router.push('//InsertPatient?hasID=false')}
         >
           <Text style={styles.buttonText}>Registration patient (without any ID)</Text>
         </TouchableOpacity>

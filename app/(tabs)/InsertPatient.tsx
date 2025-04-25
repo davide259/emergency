@@ -1,120 +1,75 @@
 import * as React from 'react';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { Checkbox } from 'react-native-paper';
-import { View, Text, StyleSheet } from 'react-native';
 
-export default function MyCheckbox() {
-  const [group, setGroup] = React.useState({
-    checkbox1: false,
-    checkbox2: false,
-    checkbox3: false,
-    checkbox4: false,
-  });
+const symptoms = {
+  Respiratory: ['Dyspnea', 'Rales', 'Cough', 'Cyanosis', 'Tachypnea'],
+  Cardiac: ['Chest pain', 'Palpitations', 'Hypotension', 'Tachycardia', 'Absent pulse'],
+  Neurological: ['Confusion', 'Loss of consciousness', 'Convulsions', 'Paralysis'],
+  Cutaneous: ['Pallor', 'Cold sweats', 'Petechiae', 'Jaundice'],
+  Gastrointestinal: ['Abdominal pain', 'Vomiting', 'Diarrhea', 'Blood in stool'],
+  Trauma: ['Wounds', 'Fractures', 'Bruises', 'Immobility', 'Hemorrhages']
+};
 
-  const toggleCheckbox = (key) => {
-    setGroup({ ...group, [key]: !group[key] });
+export default function SymptomsCheckboxList() {
+  const [checkedItems, setCheckedItems] = React.useState({});
+
+  const toggleCheckbox = (category, symptom) => {
+    const key = `${category}-${symptom}`;
+    setCheckedItems((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>Respiratory</Text>
-      <View style={styles.group}>
-        <Text style={styles.label}>Dyspnea</Text>
-        <Checkbox
-          status={group.dyspnea ? 'checked' : 'unchecked'}
-          onPress={() => toggleCheckbox('dyspnea')}
-        />
-      </View>
-
-      <View style={styles.group}>
-        <Text style={styles.label}>Rales</Text>
-        <Checkbox
-          status={group.rales ? 'checked' : 'unchecked'}
-          onPress={() => toggleCheckbox('rales')}
-        />
-      </View>
-
-      <View style={styles.group}>
-        <Text style={styles.label}>Cough</Text>
-        <Checkbox
-          status={group.cough ? 'checked' : 'unchecked'}
-          onPress={() => toggleCheckbox('cough')}
-        />
-      </View>
-
-      <View style={styles.group}>
-        <Text style={styles.label}>Cyanosis</Text>
-        <Checkbox
-          status={group.cyanosis ? 'checked' : 'unchecked'}
-          onPress={() => toggleCheckbox('cyanosis')}
-        />
-      </View>
-
-      <View style={styles.group}>
-          <Text style={styles.label}>Tachypnea</Text>
-          <Checkbox
-            status={group.tachypnea ? 'checked' : 'unchecked'}
-            onPress={() => toggleCheckbox('tachypnea')}
-          />
-    </View>
-
-    <Text style={styles.label}>Respiratory</Text>
-          <View style={styles.group}>
-            <Text style={styles.label}>Dyspnea</Text>
-            <Checkbox
-              status={group.checkbox1 ? 'checked' : 'unchecked'}
-              onPress={() => toggleCheckbox('dyspnea')}
-            />
-          </View>
-
-          <View style={styles.group}>
-            <Text style={styles.label}>Rales</Text>
-            <Checkbox
-              status={group.checkbox2 ? 'checked' : 'unchecked'}
-              onPress={() => toggleCheckbox('rales')}
-            />
-          </View>
-
-          <View style={styles.group}>
-            <Text style={styles.label}>Cough</Text>
-            <Checkbox
-              status={group.checkbox3 ? 'checked' : 'unchecked'}
-              onPress={() => toggleCheckbox('cough')}
-            />
-          </View>
-
-          <View style={styles.group}>
-            <Text style={styles.label}>Cyanosis</Text>
-            <Checkbox
-              status={group.checkbox4 ? 'checked' : 'unchecked'}
-              onPress={() => toggleCheckbox('cyanosis')}
-            />
-          </View>
-
-          <View style={styles.group}>
-              <Text style={styles.label}>Tachypnea</Text>
-              <Checkbox
-                status={group.checkbox4 ? 'checked' : 'unchecked'}
-                onPress={() => toggleCheckbox('tachypnea')}
-              />
+    <ScrollView contentContainerStyle={styles.container}>
+      {Object.entries(symptoms).map(([category, items]) => (
+        <View key={category} style={styles.groupContainer}>
+          <Text style={styles.categoryTitle}>{category}</Text>
+          {items.map((symptom) => {
+            const key = `${category}-${symptom}`;
+            return (
+              <View key={key} style={styles.checkboxContainer}>
+                <Checkbox
+                  status={checkedItems[key] ? 'checked' : 'unchecked'}
+                  onPress={() => toggleCheckbox(category, symptom)}
+                />
+                <Text style={styles.label}>{symptom}</Text>
+              </View>
+            );
+          })}
         </View>
-    </View>
+      ))}
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center', // centra verticalmente
-    alignItems: 'center',     // centra orizzontalmente
-    backgroundColor: '#fff',
+    paddingVertical: 40,
+    paddingHorizontal: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  group: {
+  groupContainer: {
+    marginBottom: 30,
+    width: '100%',
+  },
+  categoryTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
+    color: '#333',
+  },
+  checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 10,
+    marginBottom: 5,
+    paddingLeft: 20,
   },
   label: {
     fontSize: 16,
-    marginRight: 10,
   },
 });
