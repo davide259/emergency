@@ -23,7 +23,7 @@ export default function PatientScreen() {
         {/* Button for patient with ID */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => router.push('/patientAfterRegister?hasID=true')}
+          onPress={() => router.push('/InsertPatient?hasID=true')}
         >
           <Text style={styles.buttonText}>
             Registration patient (via Tessera Sanitaria)
