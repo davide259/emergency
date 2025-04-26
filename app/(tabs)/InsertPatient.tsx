@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { Checkbox } from 'react-native-paper';
+import { Picker } from '@react-native-picker/picker';
 
 const symptoms = {
   Respiratory: ['Dyspnea', 'Rales', 'Cough', 'Cyanosis', 'Tachypnea'],
@@ -11,8 +12,16 @@ const symptoms = {
   Trauma: ['Wounds', 'Fractures', 'Bruises', 'Immobility', 'Hemorrhages']
 };
 
+const triageColors = [
+  { label: 'White - No triage', value: 'white' },
+  { label: 'Green - Minor', value: 'green' },
+  { label: 'Orange - Moderate', value: 'orange' },
+  { label: 'Red - Major', value: 'red' },
+];
+
 export default function SymptomsCheckboxList() {
   const [checkedItems, setCheckedItems] = React.useState({});
+  const [triageCode, setTriageCode] = React.useState('');
 
   const toggleCheckbox = (category, symptom) => {
     const key = `${category}-${symptom}`;
@@ -24,6 +33,8 @@ export default function SymptomsCheckboxList() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+
+      {/* Checkbox groups */}
       {Object.entries(symptoms).map(([category, items]) => (
         <View key={category} style={styles.groupContainer}>
           <Text style={styles.categoryTitle}>{category}</Text>
@@ -41,6 +52,34 @@ export default function SymptomsCheckboxList() {
           })}
         </View>
       ))}
+
+      {/* Select triage color */}
+      <Text style={styles.categoryTitle}>Triage Code</Text>
+      <View style={styles.triageOptionsContainer}>
+        {triageColors.map((color) => (
+          <TouchableOpacity
+            key={color.value}
+            style={[
+              styles.triageOption,
+              triageCode === color.value && styles.triageOptionSelected,
+            ]}
+            onPress={() => setTriageCode(color.value)}
+          >
+            <View
+              style={[
+                styles.triageColorBoxSmall,
+                { backgroundColor: color.value },
+              ]}
+            />
+            <Text style={styles.triageOptionLabel}>{color.label}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+    <TouchableOpacity style={styles.sendButton} onPress={() => console.log('Send button pressed')}>
+      <Text style={styles.sendButtonText}>Send</Text>
+    </TouchableOpacity>
+
     </ScrollView>
   );
 }
@@ -71,5 +110,61 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
+  },
+  pickerWrapper: {
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    width: '100%',
+    marginBottom: 30,
+  },
+  picker: {
+    height: 50,
+    width: '100%',
+  },
+  triageOptionsContainer: {
+    width: '100%',
+    marginBottom: 30,
+  },
+
+  triageOption: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    marginBottom: 10,
+    backgroundColor: '#fff',
+  },
+
+  triageOptionSelected: {
+    borderColor: '#007bff',
+    backgroundColor: '#e6f0ff',
+  },
+
+  triageColorBoxSmall: {
+    width: 20,
+    height: 20,
+    borderRadius: 4,
+    marginRight: 15,
+  },
+
+  triageOptionLabel: {
+    fontSize: 16,
+  },
+
+  sendButton: {
+    backgroundColor: '#828282',
+    paddingHorizontal: 30,
+    paddingVertical: 15,
+    borderRadius: 5,
+    width: '100%'
+  },
+
+  sendButtonText: {
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
