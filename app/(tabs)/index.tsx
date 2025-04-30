@@ -48,7 +48,7 @@ export default function HomeScreen() {
 
       {/* Bottom Bar */}
       <View style={styles.bottomBar}>
-        <TouchableOpacity style={styles.logoutButton} onPress={() => router.push('/login')}>
+        <TouchableOpacity style={styles.logoutButton} onPress={() => console.log('Login button pressed')}>
           <Text style={styles.logoutText}>Logged user: John Doe</Text>
         </TouchableOpacity>
 
