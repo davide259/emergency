@@ -1,1 +1,1 @@
-I've only changed the colors of the topbar in all the pages. I've also created a graphic interface for the login section.
+I've updated the the page of the app, i've added the identification section for the patient, with ID and no
