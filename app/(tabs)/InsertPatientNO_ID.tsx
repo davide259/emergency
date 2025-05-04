@@ -103,7 +103,7 @@ export default function PatientInfoForm() {
         style={styles.button}
         onPress={() => router.push('/InsertPatient')}
       >
-        <Text style={styles.buttonText}>Insert Patient</Text>
+        <Text style={styles.buttonText}>GO TO INSERT THE PATIENT</Text>
       </TouchableOpacity>
 
     </View>
@@ -130,14 +130,17 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
   },
   button: {
-    backgroundColor: '#00FFFF',
-    padding: 10,
+    backgroundColor: '#ffffff',
+    paddingHorizontal: 30,
+    paddingVertical: 15,
     borderRadius: 5,
-    alignItems: 'center',
-    marginTop: 20,
+    width: '100%',
+    borderColor: 'black',
+    borderWidth: 1,
   },
   buttonText: {
     fontSize: 16,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
