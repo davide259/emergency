@@ -9,8 +9,7 @@ export default function PatientInfoForm() {
   const [age, setAge] = useState('');
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
-  const [complexion, setComplexion] = useState('');
-  const [hair, setHair] = useState('');
+  const [ethnicity, setEthnicity] = useState('');
 
   return (
     <View style={styles.container}>
@@ -69,22 +68,25 @@ export default function PatientInfoForm() {
         <Picker.Item label=">90 kg" value=">90" />
       </Picker>
 
-      {/* Complexion */}
-      <Text style={styles.label}>Complexion</Text>
+      {/* Ethnicity */}
+      <Text style={styles.label}>Ethnicity</Text>
       <Picker
-        selectedValue={complexion}
-        onValueChange={(itemValue) => setComplexion(itemValue)}
+        selectedValue={ethnicity}
+        onValueChange={(itemValue) => setEthnicity(itemValue)}
         style={styles.picker}
       >
-        <Picker.Item label="Select complexion..." value="" />
-        <Picker.Item label="Light" value="light" />
-        <Picker.Item label="Olive" value="olive" />
-        <Picker.Item label="Dark" value="dark" />
-        <Picker.Item label="Very dark" value="very-dark" />
+         <Picker.Item label="Select ethnicity..." value="" />
+        <Picker.Item label="Caucasian" value="caucasian" />
+        <Picker.Item label="Hispanic or Latino" value="hispanic" />
+        <Picker.Item label="Black or African descent" value="black" />
+        <Picker.Item label="Asian" value="asian" />
+        <Picker.Item label="Middle Eastern or North African" value="mena" />
+        <Picker.Item label="Indigenous or Native" value="indigenous" />
+        <Picker.Item label="Other / Mixed" value="other" />
       </Picker>
 
       {/* Hair */}
-      <Text style={styles.label}>Hair</Text>
+      {/*<Text style={styles.label}>Hair</Text>
       <Picker
         selectedValue={hair}
         onValueChange={(itemValue) => setHair(itemValue)}
@@ -96,7 +98,7 @@ export default function PatientInfoForm() {
         <Picker.Item label="Red" value="red" />
         <Picker.Item label="Grey" value="grey" />
         <Picker.Item label="Bald" value="bald" />
-      </Picker>
+      </Picker>*/}
 
       {/* Button for patient without ID */}
       <TouchableOpacity
